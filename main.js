@@ -9,6 +9,7 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
 
 let mixer;
+let mixer2;
 
 const clock = new THREE.Clock();
 const container = document.getElementById("container");
@@ -62,18 +63,21 @@ audioLoader.load("sounds/ambient.mp3", function (buffer) {
 const dracoLoader = new DRACOLoader();
 dracoLoader.setDecoderPath("jsm/libs/draco/");
 
+let bonsai;
 let model;
 const loader = new GLTFLoader();
 loader.setDRACOLoader(dracoLoader);
 loader.load(
-  "assets/bonsai.glb",
+  "assets/birds.glb",
   function (gltf) {
     model = gltf.scene;
-    model.position.set(0, 0.5, 0);
-    model.scale.set(0.005, 0.005, 0.005);
+    model.position.set(0, 2, 0);
+    model.rotation.set(0, 4, 0);
+    model.scale.set(0.7, 0.7, 0.7);
     scene.add(model);
 
     mixer = new THREE.AnimationMixer(model);
+    mixer.clipAction(gltf.animations[0]).play();
 
     animate();
   },
@@ -82,26 +86,24 @@ loader.load(
     console.error(e);
   }
 );
-// loader.load(
-//   "assets/water_waves.glb",
-//   function (gltf) {
-//     const model = gltf.scene;
-//     model.position.set(5, 5, 0);
-//     model.scale.set(0.1, 0.1, 0.1);
-//     scene.add(model);
+loader.load(
+  "assets/bonsai.glb",
+  function (gltf) {
+    bonsai = gltf.scene;
+    bonsai.position.set(0, 0.5, 0);
+    bonsai.scale.set(0.005, 0.005, 0.005);
+    scene.add(bonsai);
 
-//     mixer = new THREE.AnimationMixer(model);
-//     mixer.clipAction(gltf.animations[0]).play();
+    mixer2 = new THREE.AnimationMixer(bonsai);
 
-//     animate();
-//   },
-//   undefined,
-//   function (e) {
-//     console.error(e);
-//   }
-// );
-
-window.onresize = function (model = model) {
+    animate();
+  },
+  undefined,
+  function (e) {
+    console.error(e);
+  }
+);
+window.onresize = function (bonsai = bonsai) {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
 
@@ -119,7 +121,9 @@ function animate() {
 
   stats.update();
 
-  model.rotation.y += 0.001;
+  bonsai.rotation.y += 0.001;
+  model.position.y = Math.sin(clock.getElapsedTime()) * 0.5 + 2;
+  model.position.x = Math.sin(clock.getElapsedTime()) * 0.5 + 0;
 
   renderer.render(scene, camera);
 }

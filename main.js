@@ -2,7 +2,7 @@ import * as THREE from "three";
 
 import Stats from "three/addons/libs/stats.module.js";
 
-import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+// import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
@@ -25,7 +25,7 @@ container.appendChild(renderer.domElement);
 const pmremGenerator = new THREE.PMREMGenerator(renderer);
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0xbfe3dd);
+scene.background = new THREE.Color(0x86a3d8);
 scene.environment = pmremGenerator.fromScene(
   new RoomEnvironment(),
   0.04
@@ -37,29 +37,29 @@ const camera = new THREE.PerspectiveCamera(
   1,
   100
 );
-camera.position.set(5, 2, 8);
+camera.position.set(0, 0, 10);
 
-const controls = new OrbitControls(camera, renderer.domElement);
-controls.target.set(0, 0.5, 0);
-controls.update();
-controls.enablePan = false;
-controls.enableDamping = true;
+// const controls = new OrbitControls(camera, renderer.domElement);
+// controls.target.set(0, 0.5, 0);
+// controls.update();
+// controls.enablePan = false;
+// controls.enableDamping = true;
 
 const dracoLoader = new DRACOLoader();
 dracoLoader.setDecoderPath("jsm/libs/draco/");
 
+let model;
 const loader = new GLTFLoader();
 loader.setDRACOLoader(dracoLoader);
 loader.load(
-  "assets/phoenix_bird.glb",
+  "assets/bonsai.glb",
   function (gltf) {
-    const model = gltf.scene;
-    model.position.set(1, 1, 0);
-    model.scale.set(0.01, 0.01, 0.01);
+    model = gltf.scene;
+    model.position.set(0, 0.5, 0);
+    model.scale.set(0.005, 0.005, 0.005);
     scene.add(model);
 
     mixer = new THREE.AnimationMixer(model);
-    mixer.clipAction(gltf.animations[0]).play();
 
     animate();
   },
@@ -68,8 +68,26 @@ loader.load(
     console.error(e);
   }
 );
+// loader.load(
+//   "assets/water_waves.glb",
+//   function (gltf) {
+//     const model = gltf.scene;
+//     model.position.set(5, 5, 0);
+//     model.scale.set(0.1, 0.1, 0.1);
+//     scene.add(model);
 
-window.onresize = function () {
+//     mixer = new THREE.AnimationMixer(model);
+//     mixer.clipAction(gltf.animations[0]).play();
+
+//     animate();
+//   },
+//   undefined,
+//   function (e) {
+//     console.error(e);
+//   }
+// );
+
+window.onresize = function (model = model) {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
 
@@ -83,9 +101,11 @@ function animate() {
 
   mixer.update(delta);
 
-  controls.update();
+  // controls.update();
 
   stats.update();
+
+  model.rotation.y += 0.001;
 
   renderer.render(scene, camera);
 }

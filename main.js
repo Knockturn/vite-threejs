@@ -137,3 +137,12 @@ function animate() {
 
   renderer.render(scene, camera);
 }
+
+const stopBtn = document.getElementById("stopbtn");
+stopBtn.onclick = function () {
+  sound.pause();
+};
+const playBtn = document.getElementById("playbtn");
+playBtn.onclick = function () {
+  sound.play();
+};

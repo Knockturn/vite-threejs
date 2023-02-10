@@ -4,14 +4,21 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <link rel="stylesheet" href="/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite ThreeJs</title>
   </head>
   <body>
     <div id="container">
       <div class="musicControl">
-        <button id="stopbtn">Pause</button>
-        <button id="playbtn">Play</button>
+        <div class="musicControl__title">
+          <i class="bi bi-music-note-beamed"></i>
+        </div>
+        <button id="stopbtn"><i class="bi bi-pause-btn"></i></button>
+        <button id="playbtn"><i class="bi bi-play-btn"></i></button>
       </div>
     </div>
     <script type="module" src="/main.js"></script>

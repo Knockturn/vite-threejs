@@ -7,6 +7,10 @@ body {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
 }
+.musicControl .musicControl__title {
+  grid-column: 3 / 5;
+  justify-self: center;
+}
 .musicControl #stopbtn {
   grid-column: 3;
   justify-self: end;

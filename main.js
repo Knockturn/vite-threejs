@@ -122,7 +122,7 @@ function animate() {
   stats.update();
 
   bonsai.rotation.y += 0.001;
-  model.position.y = Math.sin(clock.getElapsedTime()) * 0.2 + 2;
+  model.position.y = Math.sin(clock.getElapsedTime()) * 0.2 + 1.5;
   model.position.x = Math.sin(clock.getElapsedTime()) * 0.2 + 0;
   model.position.z = Math.sin(clock.getElapsedTime()) * 0.2 + 0;
   // model.rotation.y = Math.sin(clock.getElapsedTime()) * 0.5 + 4;

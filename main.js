@@ -131,7 +131,7 @@ function animate() {
   if (camera.position.z > 0) {
     camera.position.z += 0.01;
   }
-  if (camera.position.z >= 100) {
+  if (camera.position.z >= 80) {
     camera.position.z -= 0.01;
   }
 

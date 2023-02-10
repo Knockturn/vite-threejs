@@ -33,7 +33,7 @@ scene.environment = pmremGenerator.fromScene(
 ).texture;
 
 const camera = new THREE.PerspectiveCamera(
-  40,
+  4,
   window.innerWidth / window.innerHeight,
   1,
   100
@@ -71,7 +71,7 @@ loader.load(
   "assets/birds.glb",
   function (gltf) {
     model = gltf.scene;
-    model.position.set(0, 2, 0);
+    model.position.set(0, -2, 0);
     model.rotation.set(0, 4, 0);
     model.scale.set(0.7, 0.7, 0.7);
     scene.add(model);
@@ -90,7 +90,7 @@ loader.load(
   "assets/bonsai.glb",
   function (gltf) {
     bonsai = gltf.scene;
-    bonsai.position.set(0, 0.5, 0);
+    bonsai.position.set(0, 0, 0);
     bonsai.scale.set(0.005, 0.005, 0.005);
     scene.add(bonsai);
 
@@ -122,8 +122,18 @@ function animate() {
   stats.update();
 
   bonsai.rotation.y += 0.001;
-  model.position.y = Math.sin(clock.getElapsedTime()) * 0.5 + 2;
-  model.position.x = Math.sin(clock.getElapsedTime()) * 0.5 + 0;
+  model.position.y = Math.sin(clock.getElapsedTime()) * 0.2 + 2;
+  model.position.x = Math.sin(clock.getElapsedTime()) * 0.2 + 0;
+  model.position.z = Math.sin(clock.getElapsedTime()) * 0.2 + 0;
+  // model.rotation.y = Math.sin(clock.getElapsedTime()) * 0.5 + 4;
+  model.rotation.y += 0.001;
+
+  if (camera.position.z > 0) {
+    camera.position.z += 0.01;
+  }
+  if (camera.position.z >= 100) {
+    camera.position.z -= 0.01;
+  }
 
   renderer.render(scene, camera);
 }

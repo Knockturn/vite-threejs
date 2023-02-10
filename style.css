@@ -10,20 +10,8 @@ body {
 .musicControl #stopbtn {
   grid-column: 3;
   justify-self: end;
-  background-color: #21252c;
-  color: #000;
-  border: none;
-  padding: 10px;
-  font-size: 20px;
-  cursor: pointer;
 }
 .musicControl #playbtn {
   grid-column: 4;
   justify-self: start;
-  background-color: #21252c;
-  color: #000;
-  border: none;
-  padding: 10px;
-  font-size: 20px;
-  cursor: pointer;
 }

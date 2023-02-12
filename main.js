@@ -73,7 +73,7 @@ loader.load(
     model = gltf.scene;
     model.position.set(0, -2, 0);
     model.rotation.set(0, 4, 0);
-    model.scale.set(0.1, 0.1, 0.1);
+    model.scale.set(0.08, 0.08, 0.08);
     scene.add(model);
 
     mixer = new THREE.AnimationMixer(model);
@@ -121,9 +121,9 @@ function animate() {
 
   stats.update();
 
-  bonsai.rotation.y += 0.001;
+  bonsai.rotation.y += 0.0003;
   model.position.y = Math.sin(clock.getElapsedTime()) * 0.1 + 1;
-  model.position.x = Math.sin(clock.getElapsedTime()) * 0.2 + 0;
+  model.position.x = Math.sin(clock.getElapsedTime()) * 0.1 + 0;
   model.position.z = Math.sin(clock.getElapsedTime()) * 0.2 + 0;
   model.rotation.y -= 0.001;
 
